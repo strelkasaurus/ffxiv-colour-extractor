@@ -45,7 +45,7 @@
                                 {% for row in palette.rows %}
                                 <tr>
                                     {% for colour in row %}
-                                    <td style="background-color: rgb({{ colour[0] }}, {{ colour[1] }}, {{ colour[2] }})" title="({{ colour[0] }}, {{ colour[1] }}, {{ colour[2] }})" aria-label="R: {{ colour[0] }}, G: {{ colour[1] }}, B: {{ colour[2] }}" tabindex="0"></td>
+                                    <td style="background-color: rgb({{ colour[0] }}, {{ colour[1] }}, {{ colour[2] }})" title="({{ colour[0] }}, {{ colour[1] }}, {{ colour[2] }})" tabindex="0"></td>
                                     {% endfor %}
                                 </tr>
                                 {% endfor %}
