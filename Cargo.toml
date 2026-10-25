@@ -1,0 +1,11 @@
+[package]
+name = "ffxiv-colour-extractor"
+description = "A tool to extract the racial character creator colour parameters from the FFXIV human.cmp"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ironworks = {git = "https://github.com/WorkingRobot/ironworks.git", features = ["cmp"]}
+anyhow = "1.0"
+tera = "2.4"
+serde = { version = "1.0", features = ["derive"] }

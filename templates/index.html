@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FFXIV character creator colour sets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        .colour-table { table-layout: fixed; width: 100%; max-width: 30rem; }
+        .colour-table td { height: 2rem; padding: 0; }
+        .colour-table td:focus { outline: 2px solid black; outline-offset: -2px; }
+    </style>
+</head>
+<body>
+<main class="container py-4">
+    <h1>FFXIV character creator colour sets</h1>
+    <p>As of version 7.57</p>
+    <ul class="nav nav-tabs" role="tablist" aria-label="Races">
+        {% for race in races %}
+        <li class="nav-item" role="presentation">
+            <button class="race-tab nav-link{% if loop.first %} active{% endif %}" id="race-{{ race.id }}-tab" data-bs-toggle="tab" data-bs-target="#race-{{ race.id }}" type="button" role="tab" aria-controls="race-{{ race.id }}" aria-selected="{% if loop.first %}true{% else %}false{% endif %}">{{ race.name }}</button>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content pt-3">
+        {% for race in races %}
+        <section class="tab-pane fade{% if loop.first %} show active{% endif %}" id="race-{{ race.id }}" role="tabpanel" aria-labelledby="race-{{ race.id }}-tab" tabindex="0">
+            <ul class="nav nav-pills mb-3" role="tablist" aria-label="{{ race.name }} tribes and genders">
+                {% for tribe in race.tribes %}
+                <li class="nav-item" role="presentation">
+                    <button class="tribe-tab nav-link{% if loop.first %} active{% endif %}" id="race-{{ race.id }}-tribe-{{ tribe.id }}-tab" data-bs-toggle="tab" data-bs-target="#race-{{ race.id }}-tribe-{{ tribe.id }}" type="button" role="tab" aria-controls="race-{{ race.id }}-tribe-{{ tribe.id }}" aria-selected="{% if loop.first %}true{% else %}false{% endif %}">{{ tribe.name }} ({{ tribe.gender }})</button>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                {% for tribe in race.tribes %}
+                <div class="tab-pane fade{% if loop.first %} show active{% endif %}" id="race-{{ race.id }}-tribe-{{ tribe.id }}" role="tabpanel" aria-labelledby="race-{{ race.id }}-tribe-{{ tribe.id }}-tab" tabindex="0">
+                    <div class="row g-4">
+                        {% for palette in tribe.palettes %}
+                        <div class="col-12 col-md-6">
+                            <table class="table table-bordered colour-table" aria-label="{{ race.name }} {{ tribe.name }} {{ tribe.gender }} {{ palette.name }} colours">
+                                <caption class="caption-top">{{ palette.name }} colours</caption>
+                                <tbody>
+                                {% for row in palette.rows %}
+                                <tr>
+                                    {% for colour in row %}
+                                    <td style="background-color: rgb({{ colour[0] }}, {{ colour[1] }}, {{ colour[2] }})" title="R: {{ colour[0] }}, G: {{ colour[1] }}, B: {{ colour[2] }}" aria-label="R: {{ colour[0] }}, G: {{ colour[1] }}, B: {{ colour[2] }}" tabindex="0"></td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
